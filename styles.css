@@ -1,6 +1,7 @@
 #sketch {
   display: flex;
   flex-wrap: wrap;
+  border: solid 5px black;
 }
 
 .square {
