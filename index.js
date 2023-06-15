@@ -34,6 +34,7 @@ let square;
 let isDrawing = false;
 let drawMode = DRAW_MODE_DEFAULT;
 let hue = 0;
+let squarePencilOpacities = []; // all squares' opacities for black color in percent
 
 function createSquares(size) {
   const squareSize = edgeLength / size;
@@ -41,6 +42,8 @@ function createSquares(size) {
   for (let i = 0; i < size * size; i++) {
     square = document.createElement("div");
     square.classList.add("square");
+    square.id = i;
+    squarePencilOpacities.push(0);
     square.style.width = squareSize + "px";
     square.style.height = squareSize + "px";
     addDrawingEventListeners(square);
@@ -48,11 +51,15 @@ function createSquares(size) {
   }
 }
 
-function getDrawColor() {
+function getDrawColor(square) {
   if (drawMode === DRAW_MODE_DEFAULT) {
     return "black";
   } else if (drawMode === DRAW_MODE_PENCIL) {
-    return "black"; // todo
+    const index = +square.id;
+    let opacity = squarePencilOpacities[index];
+    opacity += 10;
+    squarePencilOpacities[index] = opacity;
+    return `rgba(0 0 0 / ${opacity / 100})`;
   } else {
     hue = (hue + 5) % 360;
     return `hsl(${hue} 100% 50%)`;
@@ -62,11 +69,11 @@ function getDrawColor() {
 function addDrawingEventListeners(squareElement) {
   squareElement.addEventListener("mousedown", (event) => {
     isDrawing = true;
-    event.target.style.backgroundColor = getDrawColor();
+    event.target.style.backgroundColor = getDrawColor(event.target);
   });
   squareElement.addEventListener("mouseenter", (event) => {
     if (isDrawing) {
-      event.target.style.backgroundColor = getDrawColor();
+      event.target.style.backgroundColor = getDrawColor(event.target);
     }
   });
 }
