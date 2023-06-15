@@ -1,10 +1,7 @@
-const SKETCH_SIZE = 10;
-const SQUARE_SIZE = 50; // in px
-
 const board = document.getElementById("board");
-const edgeLength = SQUARE_SIZE * SKETCH_SIZE;
-board.style.width = edgeLength + "px";
-board.style.height = edgeLength + "px";
+const sizeSlider = document.getElementById("sketch-size-slider");
+
+const edgeLength = board.clientWidth;
 
 let square;
 let inDrawMode = false;
@@ -17,19 +14,21 @@ function createSquares(size) {
     square.classList.add("square");
     square.style.width = squareSize + "px";
     square.style.height = squareSize + "px";
-
-    square.addEventListener("mousedown", (event) => {
-      inDrawMode = true;
-      event.target.style.backgroundColor = "black";
-    });
-    square.addEventListener("mouseenter", (event) => {
-      if (inDrawMode) {
-        event.target.style.backgroundColor = "black";
-      }
-    });
-
+    addDrawingEventListeners(square);
     board.appendChild(square);
   }
+}
+
+function addDrawingEventListeners(squareElement) {
+  squareElement.addEventListener("mousedown", (event) => {
+    inDrawMode = true;
+    event.target.style.backgroundColor = "black";
+  });
+  squareElement.addEventListener("mouseenter", (event) => {
+    if (inDrawMode) {
+      event.target.style.backgroundColor = "black";
+    }
+  });
 }
 
 function deleteSquares() {
@@ -39,15 +38,19 @@ function deleteSquares() {
   }
 }
 
+function updateSketchSize(size) {
+  deleteSquares();
+  createSquares(size);
+}
+
 document.addEventListener("mouseup", (event) => {
   inDrawMode = false;
 });
 
-const sizeSlider = document.getElementById("sketch-size-slider");
 sizeSlider.addEventListener("change", (event) => {
-  deleteSquares();
-  createSquares(event.target.value);
+  updateSketchSize(event.target.value);
 });
+
 const sketchSize = document.getElementById("sketch-size");
 sizeSlider.addEventListener("input", (event) => {
   sketchSize.innerText = event.target.value;
