@@ -23,54 +23,62 @@
   </head>
   <body>
     <h1>Etch-a-Sketch</h1>
-    <div id="controls">
-      <div>
-        <img src="mouse_left_click.png" alt="Mouse left click" width="32" />
-        <span>Draw</span>
+    <main>
+      <div id="side-panel">
+        <div id="controls">
+          <div>
+            <img src="mouse_left_click.png" alt="Mouse left click" width="32" />
+            <span>Draw</span>
+          </div>
+          <div>
+            <img
+              src="mouse_right_click.png"
+              alt="Mouse right click"
+              width="32"
+            />
+            <span>Erase</span>
+          </div>
+        </div>
+        <fieldset id="drawing-mode-options">
+          <legend>Drawing mode</legend>
+          <input
+            type="radio"
+            id="draw-mode-default"
+            name="draw-mode"
+            value="default"
+            checked
+          />
+          <label for="draw-mode-default">Default</label>
+          <input
+            type="radio"
+            id="draw-mode-pencil"
+            name="draw-mode"
+            value="pencil"
+          />
+          <label for="draw-mode-pencil">Pencil</label>
+          <input
+            type="radio"
+            id="draw-mode-rainbow"
+            name="draw-mode"
+            value="rainbow"
+          />
+          <label for="draw-mode-rainbow">Rainbow</label>
+        </fieldset>
+        <div>
+          <input
+            type="range"
+            id="sketch-size-slider"
+            name="size-slider"
+            min="5"
+            max="100"
+            value="10"
+          />
+          <label for="sketch-size-slider"
+            >Sketch size: <span id="sketch-size"></span
+          ></label>
+        </div>
       </div>
-      <div>
-        <img src="mouse_right_click.png" alt="Mouse right click" width="32" />
-        <span>Erase</span>
-      </div>
-    </div>
-    <fieldset id="drawing-mode-options">
-      <legend>Drawing mode</legend>
-      <input
-        type="radio"
-        id="draw-mode-default"
-        name="draw-mode"
-        value="default"
-        checked
-      />
-      <label for="draw-mode-default">Default</label>
-      <input
-        type="radio"
-        id="draw-mode-pencil"
-        name="draw-mode"
-        value="pencil"
-      />
-      <label for="draw-mode-pencil">Pencil</label>
-      <input
-        type="radio"
-        id="draw-mode-rainbow"
-        name="draw-mode"
-        value="rainbow"
-      />
-      <label for="draw-mode-rainbow">Rainbow</label>
-    </fieldset>
-    <div>
-      <input
-        type="range"
-        id="sketch-size-slider"
-        name="size-slider"
-        min="5"
-        max="100"
-        value="10"
-      />
-      <label for="sketch-size-slider"
-        >Sketch size: <span id="sketch-size"></span
-      ></label>
-    </div>
-    <div id="board"></div>
+      <div id="board"></div>
+    </main>
   </body>
 </html>

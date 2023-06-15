@@ -11,6 +11,17 @@ h1 {
   text-shadow: -5px 5px #000000cc;
 }
 
+main {
+  display: flex;
+  justify-content: center;
+}
+
+#side-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 #board {
   display: flex;
   flex-wrap: wrap;
