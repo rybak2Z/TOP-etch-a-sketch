@@ -1,6 +1,11 @@
 body {
+  font-family: "Lilita One", cursive;
   color: white;
   background: linear-gradient(25deg, #6e13ff, #9b10a0);
+}
+
+h1 {
+  font-family: "Pacifico", cursive;
 }
 
 #board {
