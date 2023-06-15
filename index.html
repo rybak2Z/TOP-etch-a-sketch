@@ -25,7 +25,8 @@
     <h1>Etch-a-Sketch</h1>
     <main>
       <div id="side-panel">
-        <div id="controls">
+        <fieldset id="controls">
+          <legend>Controls</legend>
           <div>
             <img src="mouse_left_click.png" alt="Mouse left click" width="32" />
             <span>Draw</span>
@@ -38,7 +39,7 @@
             />
             <span>Erase</span>
           </div>
-        </div>
+        </fieldset>
         <fieldset id="drawing-mode-options">
           <legend>Drawing mode</legend>
           <input
@@ -64,7 +65,8 @@
           />
           <label for="draw-mode-rainbow">Rainbow</label>
         </fieldset>
-        <div>
+        <fieldset id="sketch-size">
+          <legend>Sketch size</legend>
           <input
             type="range"
             id="sketch-size-slider"
@@ -73,10 +75,8 @@
             max="100"
             value="10"
           />
-          <label for="sketch-size-slider"
-            >Sketch size: <span id="sketch-size"></span
-          ></label>
-        </div>
+          <label for="sketch-size-slider" id="sketch-size-number"></label>
+        </fieldset>
       </div>
       <div id="board"></div>
     </main>

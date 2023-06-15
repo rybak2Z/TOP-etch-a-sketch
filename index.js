@@ -7,7 +7,7 @@ const MOUSE_RIGHT = 2;
 
 const board = document.getElementById("board");
 const sizeSlider = document.getElementById("sketch-size-slider");
-const sketchSize = document.getElementById("sketch-size");
+const sketchSize = document.getElementById("sketch-size-number");
 const fieldset = document.getElementById("drawing-mode-options");
 const radios = fieldset.querySelectorAll('input[type="radio"]');
 
