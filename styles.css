@@ -15,20 +15,27 @@ h1 {
 main {
   display: flex;
   justify-content: center;
+  column-gap: 20px;
 }
 
 #side-panel {
   display: flex;
+  row-gap: 20px;
   flex-direction: column;
   justify-content: center;
 }
 
 fieldset {
-  font-size: 20pt;
+  font-size: 16pt;
+  text-shadow: -3px 3px #000000cc;
   border: solid 3px rgb(255, 255, 255);
   border-radius: 10px;
   box-shadow: -3px 3px #000000cc;
   background-color: #00000028;
+}
+
+legend {
+  font-size: 20pt;
 }
 
 #board {
@@ -48,6 +55,21 @@ fieldset {
   user-select: none;
 }
 
+#sketch-size-number {
+  display: inline-block;
+  text-align: center;
+  min-width: 2em;
+}
+
+#controls > div {
+  display: flex;
+  align-items: baseline;
+}
+
+#controls > div > span {
+  transform: translateY(-5px);
+}
+
 img {
-  filter: invert(100%);
+  filter: invert(100%) drop-shadow(-2px 2px #000000cc);
 }
