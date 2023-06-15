@@ -2,6 +2,9 @@ const DRAW_MODE_DEFAULT = 0;
 const DRAW_MODE_PENCIL = 1;
 const DRAW_MODE_RAINBOW = 2;
 
+const MOUSE_LEFT = 0;
+const MOUSE_RIGHT = 2;
+
 const board = document.getElementById("board");
 const sizeSlider = document.getElementById("sketch-size-slider");
 const sketchSize = document.getElementById("sketch-size");
@@ -12,6 +15,7 @@ const edgeLength = board.clientWidth;
 
 let square;
 let isDrawing = false;
+let isErasing = false;
 let drawMode = DRAW_MODE_DEFAULT;
 let hue = 0;
 let squarePencilOpacities = []; // all squares' opacities for black color in percent
@@ -21,6 +25,7 @@ sketchSize.innerText = sizeSlider.value;
 
 document.addEventListener("mouseup", (event) => {
   isDrawing = false;
+  isErasing = false;
 });
 
 sizeSlider.addEventListener("change", (event) => {
@@ -74,13 +79,25 @@ function createSquares(size) {
 
 function addDrawingEventListeners(squareElement) {
   squareElement.addEventListener("mousedown", (event) => {
-    isDrawing = true;
-    event.target.style.backgroundColor = getDrawColor(event.target);
+    console.log(event.button);
+    if (event.button === MOUSE_LEFT) {
+      isDrawing = true;
+      event.target.style.backgroundColor = getDrawColor(event.target);
+    } else if (event.button === MOUSE_RIGHT) {
+      isErasing = true;
+      event.target.style.backgroundColor = "white";
+    }
   });
   squareElement.addEventListener("mouseenter", (event) => {
     if (isDrawing) {
       event.target.style.backgroundColor = getDrawColor(event.target);
+    } else if (isErasing) {
+      console.log("enter");
+      event.target.style.backgroundColor = "white";
     }
+  });
+  squareElement.addEventListener("contextmenu", (event) => {
+    event.preventDefault();
   });
 }
 
