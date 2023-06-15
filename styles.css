@@ -3,6 +3,7 @@ body {
   text-shadow: -2px 2px #000000cc;
   color: white;
   background: linear-gradient(25deg, #6e13ff, #9b10a0);
+  min-height: 100vh;
 }
 
 h1 {
@@ -45,8 +46,8 @@ legend {
   border-radius: 20px;
   overflow: hidden;
   box-shadow: -5px 5px #000000cc;
-  width: 800px;
-  height: 800px;
+  width: 70vh;
+  height: 70vh;
 }
 
 .square {
