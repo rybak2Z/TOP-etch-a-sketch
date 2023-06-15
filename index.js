@@ -1,6 +1,16 @@
 const board = document.getElementById("board");
 const sizeSlider = document.getElementById("sketch-size-slider");
 
+const fieldset = document.getElementById("drawing-mode-options");
+const radios = fieldset.querySelectorAll('input[type="radio"]');
+fieldset.addEventListener("change", (event) => {
+  const selectedMode = Array.from(radios).find((radio) => radio.checked);
+  if (selectedMode) {
+    const mode = selectedMode.value;
+    console.log("selected drawing mode:", mode);
+  }
+});
+
 const edgeLength = board.clientWidth;
 
 let square;
