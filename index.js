@@ -80,7 +80,6 @@ function createSquares(size) {
 
 function addDrawingEventListeners(squareElement) {
   squareElement.addEventListener("mousedown", (event) => {
-    console.log(event.button);
     if (event.button === MOUSE_LEFT) {
       isDrawing = true;
       event.target.style.backgroundColor = getDrawColor(event.target);
@@ -93,7 +92,6 @@ function addDrawingEventListeners(squareElement) {
     if (isDrawing) {
       event.target.style.backgroundColor = getDrawColor(event.target);
     } else if (isErasing) {
-      console.log("enter");
       event.target.style.backgroundColor = "white";
     }
   });
