@@ -1,11 +1,14 @@
 body {
   font-family: "Lilita One", cursive;
+  text-shadow: -2px 2px #000000cc;
   color: white;
   background: linear-gradient(25deg, #6e13ff, #9b10a0);
 }
 
 h1 {
   font-family: "Pacifico", cursive;
+  font-size: 40pt;
+  text-shadow: -5px 5px #000000cc;
 }
 
 #board {
