@@ -9,6 +9,31 @@
   </head>
   <body>
     <h1>Etch-a-Sketch</h1>
+    <fieldset>
+      <legend>Drawing mode</legend>
+      <input
+        type="radio"
+        id="draw-mode-default"
+        name="draw-mode"
+        value="default"
+        checked
+      />
+      <label for="draw-mode-default">Default</label>
+      <input
+        type="radio"
+        id="draw-mode-pencil"
+        name="draw-mode"
+        value="pencil"
+      />
+      <label for="draw-mode-pencil">Pencil</label>
+      <input
+        type="radio"
+        id="draw-mode-rainbow"
+        name="draw-mode"
+        value="rainbow"
+      />
+      <label for="draw-mode-rainbow">Rainbow</label>
+    </fieldset>
     <div>
       <input
         type="range"
