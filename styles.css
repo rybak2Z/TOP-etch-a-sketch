@@ -23,6 +23,14 @@ main {
   justify-content: center;
 }
 
+fieldset {
+  font-size: 20pt;
+  border: solid 3px rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: -3px 3px #000000cc;
+  background-color: #00000028;
+}
+
 #board {
   display: flex;
   flex-wrap: wrap;
