@@ -72,6 +72,7 @@ function createSquares(size) {
     squarePencilOpacities.push(0);
     square.style.width = squareSize + "px";
     square.style.height = squareSize + "px";
+    square.style.backgroundColor = "white";
     addDrawingEventListeners(square);
     board.appendChild(square);
   }
