@@ -18,7 +18,7 @@ let isDrawing = false;
 let isErasing = false;
 let drawMode = DRAW_MODE_DEFAULT;
 let hue = 0;
-let squarePencilOpacities = []; // all squares' opacities for black color in percent
+let squareLightnessValues = []; // for pencil mode
 
 createSquares(sizeSlider.value);
 sketchSize.innerText = sizeSlider.value;
@@ -69,7 +69,7 @@ function createSquares(size) {
     square = document.createElement("div");
     square.classList.add("square");
     square.id = i;
-    squarePencilOpacities.push(0);
+    squareLightnessValues.push(100);
     square.style.width = squareSize + "px";
     square.style.height = squareSize + "px";
     square.style.backgroundColor = "white";
@@ -107,10 +107,10 @@ function getDrawColor(square) {
     return "black";
   } else if (drawMode === DRAW_MODE_PENCIL) {
     const index = +square.id;
-    let opacity = squarePencilOpacities[index];
-    opacity += 10;
-    squarePencilOpacities[index] = opacity;
-    return `rgba(0 0 0 / ${opacity / 100})`;
+    let lightness = squareLightnessValues[index];
+    lightness -= 10;
+    squareLightnessValues[index] = lightness;
+    return `hsl(0 0% ${lightness}%)`;
   } else {
     hue = (hue + 5) % 360;
     return `hsl(${hue} 100% 50%)`;
