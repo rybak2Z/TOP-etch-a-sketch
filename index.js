@@ -1,3 +1,7 @@
+const DRAW_MODE_DEFAULT = 0;
+const DRAW_MODE_PENCIL = 1;
+const DRAW_MODE_RAINBOW = 2;
+
 const board = document.getElementById("board");
 const sizeSlider = document.getElementById("sketch-size-slider");
 
@@ -6,15 +10,30 @@ const radios = fieldset.querySelectorAll('input[type="radio"]');
 fieldset.addEventListener("change", (event) => {
   const selectedMode = Array.from(radios).find((radio) => radio.checked);
   if (selectedMode) {
-    const mode = selectedMode.value;
-    console.log("selected drawing mode:", mode);
+    updateDrawMode(selectedMode.value);
   }
 });
+
+function updateDrawMode(drawModeString) {
+  if (drawModeString === "default") {
+    drawMode = DRAW_MODE_DEFAULT;
+  } else if (drawModeString === "pencil") {
+    drawMode = DRAW_MODE_PENCIL;
+  } else if (drawModeString === "rainbow") {
+    drawMode = DRAW_MODE_RAINBOW;
+  } else {
+    console.warn("Unrecognized draw mode:", drawModeString);
+  }
+
+  updateSketchSize(sizeSlider.value);
+}
 
 const edgeLength = board.clientWidth;
 
 let square;
-let inDrawMode = false;
+let isDrawing = false;
+let drawMode = DRAW_MODE_DEFAULT;
+let hue = 0;
 
 function createSquares(size) {
   const squareSize = edgeLength / size;
@@ -29,14 +48,25 @@ function createSquares(size) {
   }
 }
 
+function getDrawColor() {
+  if (drawMode === DRAW_MODE_DEFAULT) {
+    return "black";
+  } else if (drawMode === DRAW_MODE_PENCIL) {
+    return "black"; // todo
+  } else {
+    hue = (hue + 5) % 360;
+    return `hsl(${hue} 100% 50%)`;
+  }
+}
+
 function addDrawingEventListeners(squareElement) {
   squareElement.addEventListener("mousedown", (event) => {
-    inDrawMode = true;
-    event.target.style.backgroundColor = "black";
+    isDrawing = true;
+    event.target.style.backgroundColor = getDrawColor();
   });
   squareElement.addEventListener("mouseenter", (event) => {
-    if (inDrawMode) {
-      event.target.style.backgroundColor = "black";
+    if (isDrawing) {
+      event.target.style.backgroundColor = getDrawColor();
     }
   });
 }
@@ -54,7 +84,7 @@ function updateSketchSize(size) {
 }
 
 document.addEventListener("mouseup", (event) => {
-  inDrawMode = false;
+  isDrawing = false;
 });
 
 sizeSlider.addEventListener("change", (event) => {
