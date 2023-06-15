@@ -9,6 +9,19 @@
   </head>
   <body>
     <h1>Etch-a-Sketch</h1>
+    <div>
+      <input
+        type="range"
+        id="sketch-size-slider"
+        name="size-slider"
+        min="5"
+        max="100"
+        value="10"
+      />
+      <label for="size-slider"
+        >Sketch size: <span id="sketch-size"></span
+      ></label>
+    </div>
     <div id="board"></div>
   </body>
 </html>
