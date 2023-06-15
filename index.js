@@ -4,9 +4,33 @@ const DRAW_MODE_RAINBOW = 2;
 
 const board = document.getElementById("board");
 const sizeSlider = document.getElementById("sketch-size-slider");
-
+const sketchSize = document.getElementById("sketch-size");
 const fieldset = document.getElementById("drawing-mode-options");
 const radios = fieldset.querySelectorAll('input[type="radio"]');
+
+const edgeLength = board.clientWidth;
+
+let square;
+let isDrawing = false;
+let drawMode = DRAW_MODE_DEFAULT;
+let hue = 0;
+let squarePencilOpacities = []; // all squares' opacities for black color in percent
+
+createSquares(sizeSlider.value);
+sketchSize.innerText = sizeSlider.value;
+
+document.addEventListener("mouseup", (event) => {
+  isDrawing = false;
+});
+
+sizeSlider.addEventListener("change", (event) => {
+  updateSketchSize(event.target.value);
+});
+
+sizeSlider.addEventListener("input", (event) => {
+  sketchSize.innerText = event.target.value;
+});
+
 fieldset.addEventListener("change", (event) => {
   const selectedMode = Array.from(radios).find((radio) => radio.checked);
   if (selectedMode) {
@@ -28,13 +52,10 @@ function updateDrawMode(drawModeString) {
   updateSketchSize(sizeSlider.value);
 }
 
-const edgeLength = board.clientWidth;
-
-let square;
-let isDrawing = false;
-let drawMode = DRAW_MODE_DEFAULT;
-let hue = 0;
-let squarePencilOpacities = []; // all squares' opacities for black color in percent
+function updateSketchSize(size) {
+  deleteSquares();
+  createSquares(size);
+}
 
 function createSquares(size) {
   const squareSize = edgeLength / size;
@@ -49,6 +70,18 @@ function createSquares(size) {
     addDrawingEventListeners(square);
     board.appendChild(square);
   }
+}
+
+function addDrawingEventListeners(squareElement) {
+  squareElement.addEventListener("mousedown", (event) => {
+    isDrawing = true;
+    event.target.style.backgroundColor = getDrawColor(event.target);
+  });
+  squareElement.addEventListener("mouseenter", (event) => {
+    if (isDrawing) {
+      event.target.style.backgroundColor = getDrawColor(event.target);
+    }
+  });
 }
 
 function getDrawColor(square) {
@@ -66,42 +99,9 @@ function getDrawColor(square) {
   }
 }
 
-function addDrawingEventListeners(squareElement) {
-  squareElement.addEventListener("mousedown", (event) => {
-    isDrawing = true;
-    event.target.style.backgroundColor = getDrawColor(event.target);
-  });
-  squareElement.addEventListener("mouseenter", (event) => {
-    if (isDrawing) {
-      event.target.style.backgroundColor = getDrawColor(event.target);
-    }
-  });
-}
-
 function deleteSquares() {
   const squares = document.querySelectorAll(".square");
   for (const square of squares) {
     board.removeChild(square);
   }
 }
-
-function updateSketchSize(size) {
-  deleteSquares();
-  createSquares(size);
-}
-
-document.addEventListener("mouseup", (event) => {
-  isDrawing = false;
-});
-
-sizeSlider.addEventListener("change", (event) => {
-  updateSketchSize(event.target.value);
-});
-
-const sketchSize = document.getElementById("sketch-size");
-sizeSlider.addEventListener("input", (event) => {
-  sketchSize.innerText = event.target.value;
-});
-sketchSize.innerText = sizeSlider.value;
-
-createSquares(sizeSlider.value);
